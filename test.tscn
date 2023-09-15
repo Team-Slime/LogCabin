@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://be2boapsrlwbu"]
+[gd_scene load_steps=6 format=3 uid="uid://be2boapsrlwbu"]
 
-[ext_resource type="Script" path="res://shelf_parser.gd" id="1_l0hkk"]
 [ext_resource type="Script" path="res://shelf_manager.gd" id="2_1oje1"]
+[ext_resource type="Script" path="res://shelf_folder.gd" id="2_abs4g"]
+[ext_resource type="Theme" uid="uid://ddppbu11vpc1r" path="res://settings/shelf.tres" id="2_d7rlt"]
+[ext_resource type="Script" path="res://shelf_file.gd" id="3_v300s"]
+
+[sub_resource type="Theme" id="Theme_aon0p"]
+MarginContainer/constants/margin_left = 8
 
 [node name="mod" type="Control"]
 layout_mode = 3
@@ -11,21 +16,42 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="FileDialog" type="FileDialog" parent="."]
+[node name="NativeFileDialog" type="NativeFileDialog" parent="."]
 title = "Open a Directory"
-initial_position = 1
-size = Vector2i(452, 162)
-transparent = true
-ok_button_text = "Select Current Folder"
-dialog_close_on_escape = false
 file_mode = 2
 access = 2
-script = ExtResource("1_l0hkk")
 
-[node name="ShelfManager" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 51.0
-grow_vertical = 2
+[node name="ShelfManager" type="VBoxContainer" parent="." node_paths=PackedStringArray("add_folder", "remove_folder", "file_dialog")]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 script = ExtResource("2_1oje1")
+add_folder = NodePath("AddFolder")
+remove_folder = NodePath("RemoveFolder")
+file_dialog = NodePath("../NativeFileDialog")
+margin_setting = ExtResource("2_d7rlt")
+
+[node name="RemoveFolder" type="Button" parent="ShelfManager"]
+layout_mode = 2
+text = "Remove Folder"
+
+[node name="AddFolder" type="Button" parent="ShelfManager"]
+layout_mode = 2
+text = "Add Folder"
+
+[node name="ShelfItem" type="VBoxContainer" parent="ShelfManager"]
+layout_mode = 2
+script = ExtResource("2_abs4g")
+margin_setting = SubResource("Theme_aon0p")
+
+[node name="ShelfFile" type="Button" parent="ShelfManager/ShelfItem"]
+layout_mode = 2
+script = ExtResource("3_v300s")
+
+[node name="MarginContainer" type="MarginContainer" parent="ShelfManager"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
