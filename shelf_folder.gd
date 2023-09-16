@@ -24,6 +24,7 @@ func add_item(path: String, is_directory: bool) -> Control:
 		var label := ShelfItem.new()
 		label.path = path
 		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		label.add_to_group("ShelfItem")
 		add_child(label)
 		var margin := MarginContainer.new()
 		margin.theme = margin_setting
@@ -36,6 +37,7 @@ func add_item(path: String, is_directory: bool) -> Control:
 		item = ShelfItem.new()
 		item.path = path
 		item.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		item.add_to_group("ShelfItem")
 		add_child(item)
 	return item
 

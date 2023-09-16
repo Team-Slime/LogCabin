@@ -45,8 +45,8 @@ placeholder_text = "Search"
 caret_blink = true
 script = ExtResource("3_2mvux")
 group = NodePath("../..")
-show_type = 1
 hide_blacklist = [NodePath(".."), NodePath("."), NodePath("../DetachAll"), NodePath("../Import"), NodePath("../../ScrollContainer")]
+matching_edge = 0.32
 
 [node name="Import" type="Button" parent="ShelfManager/HBoxContainer"]
 layout_mode = 2
