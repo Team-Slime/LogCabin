@@ -12,11 +12,12 @@ func _ready() -> void:
 	file_dialog.dir_selected.connect(func(dir: String):
 		var item := ShelfItem.new()
 		item.path = dir
+		file_panel.add_child(item)
 		var group := ShelfGroup.new()
 		file_panel.add_child(group)
+		group.label = item
 		group.margin_setting = margin_setting
 		group.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		item.group = group
 		parse_directory(dir, group)
 	)
 	remove_folder.pressed.connect(func():

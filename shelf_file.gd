@@ -2,9 +2,10 @@ class_name ShelfItem extends Button
 
 @export var path: String :
 	set(value):
-		text = value
-		name = value
+		text = value.get_file()
+		name = value.get_file()
 		path = value
+
 
 @export var group: ShelfGroup
 
