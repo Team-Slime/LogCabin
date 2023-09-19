@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dv8fo5r33wyc"]
+
+[node name="VBoxContainer" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Filename"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+
+[node name="CodeEdit" type="CodeEdit" parent="."]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Edit file here"
+wrap_mode = 1
+highlight_current_line = true
+draw_tabs = true
+draw_spaces = true
+minimap_draw = true
+caret_blink = true
+symbol_lookup_on_click = true
+line_folding = true
+line_length_guidelines = Array[int]([80, 60])
+gutters_draw_bookmarks = true
+gutters_draw_line_numbers = true
+gutters_zero_pad_line_numbers = true
+code_completion_enabled = true
+auto_brace_completion_enabled = true
+auto_brace_completion_highlight_matching = true
+auto_brace_completion_pairs = {
+"\"": "\"",
+"'": "'",
+"(": ")",
+"*": "*",
+"**": "**",
+"[": "]",
+"{": "}"
+}

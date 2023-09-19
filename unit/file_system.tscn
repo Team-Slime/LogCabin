@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://dp3e0qs2y2ex5"]
+
+[ext_resource type="Script" path="res://shelf_manager.gd" id="1_fkyor"]
+[ext_resource type="Theme" uid="uid://ddppbu11vpc1r" path="res://settings/shelf.tres" id="2_d82cx"]
+[ext_resource type="Script" path="res://search_box.gd" id="3_31a1a"]
+[ext_resource type="Script" path="res://shelf_folder.gd" id="4_orhio"]
+
+[node name="ShelfManager" type="VBoxContainer" node_paths=PackedStringArray("add_folder", "remove_folder", "file_panel", "root")]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 259.0
+grow_vertical = 2
+script = ExtResource("1_fkyor")
+add_folder = NodePath("HBoxContainer/Import")
+remove_folder = NodePath("HBoxContainer/DetachAll")
+file_panel = NodePath("ScrollContainer")
+margin_setting = ExtResource("2_d82cx")
+root = NodePath("ScrollContainer/Root")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="DetachAll" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Detach All Folder"
+
+[node name="SearchBox" type="LineEdit" parent="HBoxContainer" node_paths=PackedStringArray("hide_blacklist")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+placeholder_text = "Search"
+caret_blink = true
+script = ExtResource("3_31a1a")
+show_type = 1
+hide_blacklist = [null, null, null, null, null]
+matching_edge = 0.32
+
+[node name="Import" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Import Folder"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="Root" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("4_orhio")
+margin_setting = ExtResource("2_d82cx")
+
+[connection signal="text_changed" from="HBoxContainer/SearchBox" to="HBoxContainer/SearchBox" method="fuzzy_search"]

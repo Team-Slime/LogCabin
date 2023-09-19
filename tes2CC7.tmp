@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=3 uid="uid://be2boapsrlwbu"]
+
+[ext_resource type="Script" path="res://shelf_manager.gd" id="2_1oje1"]
+[ext_resource type="Theme" uid="uid://ddppbu11vpc1r" path="res://settings/shelf.tres" id="2_d7rlt"]
+[ext_resource type="Script" path="res://SearchBox.gd" id="3_2mvux"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mmxuw"]
+
+[node name="mod" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NativeFileDialog" type="NativeFileDialog" parent="."]
+title = "Open a Directory"
+file_mode = 2
+access = 2
+
+[node name="ShelfManager" type="VBoxContainer" parent="." node_paths=PackedStringArray("add_folder", "remove_folder", "file_dialog", "file_panel")]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 259.0
+grow_vertical = 2
+script = ExtResource("2_1oje1")
+add_folder = NodePath("HBoxContainer/Import")
+remove_folder = NodePath("HBoxContainer/DetachAll")
+file_dialog = NodePath("../NativeFileDialog")
+file_panel = NodePath("ScrollContainer")
+margin_setting = ExtResource("2_d7rlt")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShelfManager"]
+layout_mode = 2
+
+[node name="DetachAll" type="Button" parent="ShelfManager/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_mmxuw")
+text = "Detach All Folder"
+
+[node name="SearchBox" type="LineEdit" parent="ShelfManager/HBoxContainer" node_paths=PackedStringArray("group", "hide_blacklist")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+placeholder_text = "Search"
+caret_blink = true
+script = ExtResource("3_2mvux")
+group = NodePath("../..")
+hide_blacklist = [NodePath(".."), NodePath("."), NodePath("../DetachAll"), NodePath("../Import"), NodePath("../../ScrollContainer")]
+matching_edge = 0.32
+
+[node name="Import" type="Button" parent="ShelfManager/HBoxContainer"]
+layout_mode = 2
+text = "Import Folder"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ShelfManager"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
