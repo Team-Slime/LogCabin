@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://dv8fo5r33wyc"]
+[gd_scene load_steps=2 format=3 uid="uid://dv8fo5r33wyc"]
+
+[ext_resource type="Script" path="res://markdown_parser.gd" id="1_ovrgr"]
 
 [node name="VBoxContainer" type="VBoxContainer"]
 anchors_preset = 15
@@ -7,6 +9,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
+script = ExtResource("1_ovrgr")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
