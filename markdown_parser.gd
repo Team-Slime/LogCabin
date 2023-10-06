@@ -1,12 +1,12 @@
 class_name MdParser extends Node
 
 
-var header_six := RegEx.create_from_string("^\\#\\#\\#\\#\\#\\#(.*)*/gmi")
-var header_five := RegEx.create_from_string("^\\#\\#\\#\\#\\#(.*)*/gmi")
-var header_four := RegEx.create_from_string("^\\#\\#\\#\\#(.*)*/gmi")
-var header_three := RegEx.create_from_string("^\\#\\#\\#(.*)*/gmi")
-var header_two := RegEx.create_from_string("^\\#\\#(.*)*|(.*)(?:[\\n])-+/gmi")
-var header_one := RegEx.create_from_string("^\\#(.*)*|(.*)(?:[\\n])=+/gmi")
+var header_six := RegEx.create_from_string("^\\#\\#\\#\\#\\#\\#\\s(.*)")
+var header_five := RegEx.create_from_string("^\\#\\#\\#\\#\\#\\s(.*)")
+var header_four := RegEx.create_from_string("^\\#\\#\\#\\#\\s(.*)")
+var header_three := RegEx.create_from_string("^\\#\\#\\#\\s(.*)")
+var header_two := RegEx.create_from_string("^\\#\\#(.*)*|(.*)(?:[\\n])-+")
+var header_one := RegEx.create_from_string("^\\#(.*)*|(.*)(?:[\\n])=+")
 
 var bold_italic := RegEx.create_from_string("\\*\\*\\*(.*)\\*\\*\\*|\\_\\_\\_(.*)\\_\\_\\_/gmi")
 var bold := RegEx.create_from_string("\\*\\*(.*)\\*\\|\\_\\_(.*)\\_\\_*")
@@ -32,11 +32,7 @@ var link := RegEx.create_from_string("\\[([^\\]]+)\\]\\(([^)]+)\\)/gmi")
 
 func _ready():
 	var markdown_text = """
-# Header
-**Bold** and *italic* text.
-[Link](https://example.com)
-- List item 1
-- List item 2
+###### Heading
 """
 	var bbcode_text = markdown_to_bbcode(markdown_text)
 	print(bbcode_text)
@@ -63,3 +59,7 @@ func markdown_to_bbcode(markdown: String):
 	
 	markdown = horizontal_line.sub(markdown, "[hr]", true)
 	return markdown
+
+
+func _on_code_edit_text_changed() -> void:
+	$Wysiwyg/Preview.text = $Wysiwyg/CodeEdit.text
