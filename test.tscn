@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://be2boapsrlwbu"]
+[gd_scene load_steps=4 format=3 uid="uid://be2boapsrlwbu"]
 
 [ext_resource type="PackedScene" uid="uid://dp3e0qs2y2ex5" path="res://unit/file_system.tscn" id="1_fs11v"]
 [ext_resource type="PackedScene" uid="uid://dv8fo5r33wyc" path="res://unit/file_editor.tscn" id="2_oyicy"]
+[ext_resource type="Script" path="res://markdown_parser.gd" id="3_ohr1l"]
 
 [node name="mod" type="Control"]
 layout_mode = 3
@@ -11,10 +12,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="NativeFileDialog" type="NativeFileDialog" parent="."]
+[node name="FileDialog" type="FileDialog" parent="."]
 title = "Open a Directory"
+ok_button_text = "Select Current Folder"
 file_mode = 2
 access = 2
+use_native_dialog = true
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
 layout_mode = 1
@@ -26,8 +29,7 @@ grow_vertical = 2
 
 [node name="ShelfManager" parent="HSplitContainer" node_paths=PackedStringArray("file_dialog") instance=ExtResource("1_fs11v")]
 layout_mode = 2
-size_flags_horizontal = 3
-file_dialog = NodePath("../../NativeFileDialog")
+file_dialog = NodePath("../../FileDialog")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer"]
 layout_mode = 2
@@ -35,8 +37,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VSplitContainer" type="VSplitContainer" parent="HSplitContainer/HSplitContainer"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="FileTab" type="VBoxContainer" parent="HSplitContainer/HSplitContainer/VSplitContainer"]
 layout_mode = 2
@@ -71,5 +73,11 @@ placeholder_text = "Search for header"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" parent="HSplitContainer/HSplitContainer" instance=ExtResource("2_oyicy")]
+[node name="File" parent="HSplitContainer/HSplitContainer" instance=ExtResource("2_oyicy")]
 layout_mode = 2
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_ohr1l")

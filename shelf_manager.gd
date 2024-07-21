@@ -2,7 +2,7 @@ class_name ShelfManager extends ShelfGroup
 
 @export var add_folder: Button
 @export var remove_folder: Button
-@export var file_dialog: NativeFileDialog
+@export var file_dialog: FileDialog
 @export var file_panel: ScrollContainer
 
 func _ready() -> void:

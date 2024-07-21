@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="Log Cabin"
-config/features=PackedStringArray("4.1", "Mobile")
+config/tags=PackedStringArray("app")
+config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/expander/plugin.cfg", "res://addons/form/plugin.cfg", "res://addons/rich_text_label_ex/plugin.cfg", "res://addons/tnowe_extra_controls/plugin.cfg")
 
 [rendering]
 
