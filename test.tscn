@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://be2boapsrlwbu"]
 
-[ext_resource type="PackedScene" uid="uid://dp3e0qs2y2ex5" path="res://unit/file_system.tscn" id="1_fs11v"]
-[ext_resource type="PackedScene" uid="uid://caa8hyoisho7m" path="res://unit/file_aside.tscn" id="2_ikjm5"]
-[ext_resource type="PackedScene" uid="uid://dv8fo5r33wyc" path="res://unit/markdown_editor.tscn" id="2_oyicy"]
+[ext_resource type="PackedScene" uid="uid://dp3e0qs2y2ex5" path="res://src/components/file_system.tscn" id="1_fs11v"]
+[ext_resource type="PackedScene" uid="uid://caa8hyoisho7m" path="res://src/components/file_aside.tscn" id="2_ikjm5"]
+[ext_resource type="PackedScene" uid="uid://dv8fo5r33wyc" path="res://src/components/markdown_editor.tscn" id="2_oyicy"]
 [ext_resource type="Script" path="res://markdown_parser.gd" id="3_ohr1l"]
-[ext_resource type="PackedScene" uid="uid://fhrx5fhi5epg" path="res://unit/markdown_aside.tscn" id="3_ufg7a"]
+[ext_resource type="PackedScene" uid="uid://fhrx5fhi5epg" path="res://src/components/markdown_aside.tscn" id="3_ufg7a"]
 
 [node name="mod" type="Control"]
 layout_mode = 3
