@@ -1,0 +1,26 @@
+extends Resource
+class_name MarkdownTokenType
+enum {
+	START,
+	NEWLINE,
+	PARAGRAPH,
+	TAB,
+	HEADER_6,
+	HEADER_5,
+	HEADER_4,
+	HEADER_3,
+	HEADER_2,
+	HEADER_1,
+	BOLD,
+	ITALIC,
+	UNDERLINE,
+	STRIKETHROUGH,
+	SUPER_SCRIPT,
+	SUB_SCRIPT,
+	Quote,
+	HORIZONTAL_RULE,
+	CODE_LINE,
+	CODE_BLOCK,
+	IMAGE,
+	LINK
+}
