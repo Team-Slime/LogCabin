@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://dp3e0qs2y2ex5"]
 
-[ext_resource type="Script" path="res://shelf_manager.gd" id="1_fkyor"]
+[ext_resource type="Script" path="res://src/scripts/shelf_manager.gd" id="1_fkyor"]
 [ext_resource type="Theme" uid="uid://ddppbu11vpc1r" path="res://settings/shelf.tres" id="2_d82cx"]
-[ext_resource type="Script" path="res://search_box.gd" id="3_31a1a"]
-[ext_resource type="Script" path="res://shelf_folder.gd" id="4_orhio"]
+[ext_resource type="Script" path="res://src/scripts/search_box.gd" id="3_31a1a"]
+[ext_resource type="Script" path="res://src/scripts/shelf_folder.gd" id="4_orhio"]
 
 [node name="ShelfManager" type="VBoxContainer" node_paths=PackedStringArray("add_folder", "remove_folder", "file_panel", "root")]
 anchors_preset = 9

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dv8fo5r33wyc"]
 
-[ext_resource type="Script" path="res://markdown_parser.gd" id="1_pcvni"]
+[ext_resource type="Script" path="res://src/scripts/markdown_parser.gd" id="1_pcvni"]
 
 [node name="MarkdownEditor" type="VBoxContainer"]
 anchors_preset = 15
