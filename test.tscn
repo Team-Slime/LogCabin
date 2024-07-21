@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://be2boapsrlwbu"]
+[gd_scene load_steps=6 format=3 uid="uid://be2boapsrlwbu"]
 
 [ext_resource type="PackedScene" uid="uid://dp3e0qs2y2ex5" path="res://unit/file_system.tscn" id="1_fs11v"]
-[ext_resource type="PackedScene" uid="uid://dv8fo5r33wyc" path="res://unit/file_editor.tscn" id="2_oyicy"]
+[ext_resource type="PackedScene" uid="uid://caa8hyoisho7m" path="res://unit/file_aside.tscn" id="2_ikjm5"]
+[ext_resource type="PackedScene" uid="uid://dv8fo5r33wyc" path="res://unit/markdown_editor.tscn" id="2_oyicy"]
 [ext_resource type="Script" path="res://markdown_parser.gd" id="3_ohr1l"]
+[ext_resource type="PackedScene" uid="uid://fhrx5fhi5epg" path="res://unit/markdown_aside.tscn" id="3_ufg7a"]
 
 [node name="mod" type="Control"]
 layout_mode = 3
@@ -40,40 +42,13 @@ size_flags_vertical = 3
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="FileTab" type="VBoxContainer" parent="HSplitContainer/HSplitContainer/VSplitContainer"]
+[node name="FileTab" parent="HSplitContainer/HSplitContainer/VSplitContainer" instance=ExtResource("2_ikjm5")]
 layout_mode = 2
-size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="HSplitContainer/HSplitContainer/VSplitContainer/FileTab"]
+[node name="HeaderTab" parent="HSplitContainer/HSplitContainer/VSplitContainer" instance=ExtResource("3_ufg7a")]
 layout_mode = 2
-text = "File Tab"
 
-[node name="LineEdit" type="LineEdit" parent="HSplitContainer/HSplitContainer/VSplitContainer/FileTab"]
-layout_mode = 2
-placeholder_text = "Search for file"
-
-[node name="PanelContainer" type="PanelContainer" parent="HSplitContainer/HSplitContainer/VSplitContainer/FileTab"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="HeaderTab" type="VBoxContainer" parent="HSplitContainer/HSplitContainer/VSplitContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="HSplitContainer/HSplitContainer/VSplitContainer/HeaderTab"]
-layout_mode = 2
-text = "Header Tab
-"
-
-[node name="LineEdit" type="LineEdit" parent="HSplitContainer/HSplitContainer/VSplitContainer/HeaderTab"]
-layout_mode = 2
-placeholder_text = "Search for header"
-
-[node name="PanelContainer" type="PanelContainer" parent="HSplitContainer/HSplitContainer/VSplitContainer/HeaderTab"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="File" parent="HSplitContainer/HSplitContainer" instance=ExtResource("2_oyicy")]
+[node name="MarkdownEditor" parent="HSplitContainer/HSplitContainer" instance=ExtResource("2_oyicy")]
 layout_mode = 2
 
 [node name="Control" type="Control" parent="."]
