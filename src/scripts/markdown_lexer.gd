@@ -1,187 +1,56 @@
-extends Node
+extends Resource
+class_name MarkdownLexer
 
-var tokens: Array[MarkdownToken]
 
-func tokenize(input: String):
-	tokens = [MarkdownToken.of(MarkdownTokenType.START, "")]
+static func tokenize(input: String):
+	var tokens: Array = [MarkdownToken.new(MarkdownTokenType.START, "")]
+	print(tokens)
 	var character_array := input.split("")
 	for character in character_array:
-		match tokens.back().type:
-			MarkdownTokenType.START, MarkdownTokenType.NEWLINE:
-				# No frontmatter yet
-				# I aware i can bring common type outside, but i think it's more
-				# readable and indexable this way
-				match character:
-					"#": tokens.append(MarkdownToken.of(MarkdownTokenType.HEADER_1, character))
-					"*": tokens.append(MarkdownToken.of(MarkdownTokenType.ITALIC, character))
-					"-": tokens.append(MarkdownToken.of(MarkdownTokenType.HORIZONTAL_RULE, character))
-					"^": tokens.append(MarkdownToken.of(MarkdownTokenType.SUPER_SCRIPT, character))
-					"_": tokens.append(MarkdownToken.of(MarkdownTokenType.UNDERLINE, character))
-					"~": tokens.append(MarkdownToken.of(MarkdownTokenType.SUB_SCRIPT, character))
-					"`": tokens.append(MarkdownToken.of(MarkdownTokenType.CODE_BLOCK, character))
-					"\n": tokens.append(MarkdownToken.of(MarkdownTokenType.NEWLINE, character))
-					"\t": tokens.append(MarkdownToken.of(MarkdownTokenType.TAB, character))
-					_: tokens.append(MarkdownToken.of(MarkdownTokenType.PARAGRAPH, character))
-			MarkdownTokenType.PARAGRAPH, MarkdownTokenType.TAB, MarkdownTokenType.WHITESPACE:
-				match character:
-					"#": tokens.append(MarkdownToken.of(MarkdownTokenType.HEADER_1, character))
-					"*": tokens.append(MarkdownToken.of(MarkdownTokenType.ITALIC, character))
-					"^": tokens.append(MarkdownToken.of(MarkdownTokenType.SUPER_SCRIPT, character))
-					"_": tokens.append(MarkdownToken.of(MarkdownTokenType.UNDERLINE, character))
-					"~": tokens.append(MarkdownToken.of(MarkdownTokenType.SUB_SCRIPT, character))
-					"`": tokens.append(MarkdownToken.of(MarkdownTokenType.CODE_BLOCK, character))
-					"\n": tokens.append(MarkdownToken.of(MarkdownTokenType.NEWLINE, character))
-					"\t": tokens.append(MarkdownToken.of(MarkdownTokenType.TAB, character))
-					_: tokens.back().contents += character
-			MarkdownTokenType.HEADER_6:
-				match character:
-					"*": tokens.append(MarkdownToken.of(MarkdownTokenType.ITALIC, character))
-					"^": tokens.append(MarkdownToken.of(MarkdownTokenType.SUPER_SCRIPT, character))
-					"_": tokens.append(MarkdownToken.of(MarkdownTokenType.UNDERLINE, character))
-					"~": tokens.append(MarkdownToken.of(MarkdownTokenType.SUB_SCRIPT, character))
-					"\n": tokens.append(MarkdownToken.of(MarkdownTokenType.NEWLINE, character))
-					"\t": tokens.append(MarkdownToken.of(MarkdownTokenType.TAB, character))
-					" ": tokens.append(MarkdownToken.of(MarkdownTokenType.WHITESPACE, character))
-					_: tokens.append(MarkdownToken.of(MarkdownTokenType.PARAGRAPH, character))
-			MarkdownTokenType.HEADER_5:
-				match character:
-					"#": tokens.append(MarkdownToken.of(MarkdownTokenType.HEADER_6, character))
-					"*": tokens.append(MarkdownToken.of(MarkdownTokenType.ITALIC, character))
-					"^": tokens.append(MarkdownToken.of(MarkdownTokenType.SUPER_SCRIPT, character))
-					"_": tokens.append(MarkdownToken.of(MarkdownTokenType.UNDERLINE, character))
-					"~": tokens.append(MarkdownToken.of(MarkdownTokenType.SUB_SCRIPT, character))
-					"\n": tokens.append(MarkdownToken.of(MarkdownTokenType.NEWLINE, character))
-					"\t": tokens.append(MarkdownToken.of(MarkdownTokenType.TAB, character))
-					" ": tokens.append(MarkdownToken.of(MarkdownTokenType.WHITESPACE, character))
-					_: tokens.append(MarkdownToken.of(MarkdownTokenType.PARAGRAPH, character))
-			MarkdownTokenType.HEADER_4:
-				match character:
-					"#": tokens.append(MarkdownToken.of(MarkdownTokenType.HEADER_5, character))
-					"*": tokens.append(MarkdownToken.of(MarkdownTokenType.ITALIC, character))
-					"^": tokens.append(MarkdownToken.of(MarkdownTokenType.SUPER_SCRIPT, character))
-					"_": tokens.append(MarkdownToken.of(MarkdownTokenType.UNDERLINE, character))
-					"~": tokens.append(MarkdownToken.of(MarkdownTokenType.SUB_SCRIPT, character))
-					"\n": tokens.append(MarkdownToken.of(MarkdownTokenType.NEWLINE, character))
-					"\t": tokens.append(MarkdownToken.of(MarkdownTokenType.TAB, character))
-					" ": tokens.append(MarkdownToken.of(MarkdownTokenType.WHITESPACE, character))
-					_: tokens.append(MarkdownToken.of(MarkdownTokenType.PARAGRAPH, character))
-			MarkdownTokenType.HEADER_3:
-				match character:
-					"#": tokens.append(MarkdownToken.of(MarkdownTokenType.HEADER_4, character))
-					"*": tokens.append(MarkdownToken.of(MarkdownTokenType.ITALIC, character))
-					"^": tokens.append(MarkdownToken.of(MarkdownTokenType.SUPER_SCRIPT, character))
-					"_": tokens.append(MarkdownToken.of(MarkdownTokenType.UNDERLINE, character))
-					"~": tokens.append(MarkdownToken.of(MarkdownTokenType.SUB_SCRIPT, character))
-					"\n": tokens.append(MarkdownToken.of(MarkdownTokenType.NEWLINE, character))
-					"\t": tokens.append(MarkdownToken.of(MarkdownTokenType.TAB, character))
-					" ": tokens.append(MarkdownToken.of(MarkdownTokenType.WHITESPACE, character))
-					_: tokens.append(MarkdownToken.of(MarkdownTokenType.PARAGRAPH, character))
-			MarkdownTokenType.HEADER_2:
-				match character:
-					"#": tokens.append(MarkdownToken.of(MarkdownTokenType.HEADER_3, character))
-					"*": tokens.append(MarkdownToken.of(MarkdownTokenType.ITALIC, character))
-					"^": tokens.append(MarkdownToken.of(MarkdownTokenType.SUPER_SCRIPT, character))
-					"_": tokens.append(MarkdownToken.of(MarkdownTokenType.UNDERLINE, character))
-					"~": tokens.append(MarkdownToken.of(MarkdownTokenType.SUB_SCRIPT, character))
-					"\n": tokens.append(MarkdownToken.of(MarkdownTokenType.NEWLINE, character))
-					"\t": tokens.append(MarkdownToken.of(MarkdownTokenType.TAB, character))
-					" ": tokens.append(MarkdownToken.of(MarkdownTokenType.WHITESPACE, character))
-					_: tokens.append(MarkdownToken.of(MarkdownTokenType.PARAGRAPH, character))
-			MarkdownTokenType.HEADER_1:
-				match character:
-					"#": tokens.append(MarkdownToken.of(MarkdownTokenType.HEADER_2, character))
-					"*": tokens.append(MarkdownToken.of(MarkdownTokenType.ITALIC, character))
-					"^": tokens.append(MarkdownToken.of(MarkdownTokenType.SUPER_SCRIPT, character))
-					"_": tokens.append(MarkdownToken.of(MarkdownTokenType.UNDERLINE, character))
-					"~": tokens.append(MarkdownToken.of(MarkdownTokenType.SUB_SCRIPT, character))
-					"`": tokens.append(MarkdownToken.of(MarkdownTokenType.CODE_BLOCK, character))
-					"\n": tokens.append(MarkdownToken.of(MarkdownTokenType.NEWLINE, character))
-					"\t": tokens.append(MarkdownToken.of(MarkdownTokenType.TAB, character))
-					" ": tokens.append(MarkdownToken.of(MarkdownTokenType.WHITESPACE, character))
-					_: tokens.append(MarkdownToken.of(MarkdownTokenType.PARAGRAPH, character))
-			MarkdownTokenType.ITALIC:
-				match character:
-					"*": tokens = replace(tokens, MarkdownTokenType.BOLD, character)
-					"^": tokens.append(MarkdownToken.of(MarkdownTokenType.SUPER_SCRIPT, character))
-					"_": tokens.append(MarkdownToken.of(MarkdownTokenType.UNDERLINE, character))
-					"~": tokens.append(MarkdownToken.of(MarkdownTokenType.SUB_SCRIPT, character))
-					"`": tokens.append(MarkdownToken.of(MarkdownTokenType.CODE_BLOCK, character))
-					"\n": tokens.append(MarkdownToken.of(MarkdownTokenType.NEWLINE, character))
-					"\t": tokens.append(MarkdownToken.of(MarkdownTokenType.TAB, character))
-					" ": tokens.append(MarkdownToken.of(MarkdownTokenType.WHITESPACE, character))
-					_: tokens.append(MarkdownToken.of(MarkdownTokenType.PARAGRAPH, character))
-			MarkdownTokenType.BOLD:
-				match character:
-					"*": tokens.append(MarkdownToken.of(MarkdownTokenType.ITALIC, character))
-					"^": tokens.append(MarkdownToken.of(MarkdownTokenType.SUPER_SCRIPT, character))
-					"_": tokens.append(MarkdownToken.of(MarkdownTokenType.UNDERLINE, character))
-					"~": tokens.append(MarkdownToken.of(MarkdownTokenType.SUB_SCRIPT, character))
-					"`": tokens.append(MarkdownToken.of(MarkdownTokenType.CODE_BLOCK, character))
-					"\n": tokens.append(MarkdownToken.of(MarkdownTokenType.NEWLINE, character))
-					"\t": tokens.append(MarkdownToken.of(MarkdownTokenType.TAB, character))
-					_: tokens.append(MarkdownToken.of(MarkdownTokenType.PARAGRAPH, character))
-			MarkdownTokenType.UNDERLINE:
-				match character:
-					"*": tokens.append(MarkdownToken.of(MarkdownTokenType.ITALIC, character))
-					"^": tokens.append(MarkdownToken.of(MarkdownTokenType.SUPER_SCRIPT, character))
-					"~": tokens.append(MarkdownToken.of(MarkdownTokenType.SUB_SCRIPT, character))
-					"`": tokens.append(MarkdownToken.of(MarkdownTokenType.CODE_BLOCK, character))
-					"\n": tokens.append(MarkdownToken.of(MarkdownTokenType.NEWLINE, character))
-					"\t": tokens.append(MarkdownToken.of(MarkdownTokenType.TAB, character))
-					_: tokens.append(MarkdownToken.of(MarkdownTokenType.PARAGRAPH, character))
-			MarkdownTokenType.SUPER_SCRIPT:
-				match character:
-					"*": tokens.append(MarkdownToken.of(MarkdownTokenType.ITALIC, character))
-					"_": tokens.append(MarkdownToken.of(MarkdownTokenType.UNDERLINE, character))
-					"~": tokens.append(MarkdownToken.of(MarkdownTokenType.SUB_SCRIPT, character))
-					"`": tokens.append(MarkdownToken.of(MarkdownTokenType.CODE_BLOCK, character))
-					"\n": tokens.append(MarkdownToken.of(MarkdownTokenType.NEWLINE, character))
-					"\t": tokens.append(MarkdownToken.of(MarkdownTokenType.TAB, character))
-					_: tokens.append(MarkdownToken.of(MarkdownTokenType.PARAGRAPH, character))
-			MarkdownTokenType.SUB_SCRIPT:
-				match character:
-					"*": tokens.append(MarkdownToken.of(MarkdownTokenType.ITALIC, character))
-					"^": tokens.append(MarkdownToken.of(MarkdownTokenType.SUPER_SCRIPT, character))
-					"_": tokens.append(MarkdownToken.of(MarkdownTokenType.UNDERLINE, character))
-					"~": tokens = replace(tokens, MarkdownTokenType.STRIKETHROUGH, character)
-					"`": tokens.append(MarkdownToken.of(MarkdownTokenType.CODE_BLOCK, character))
-					"\n": tokens.append(MarkdownToken.of(MarkdownTokenType.NEWLINE, character))
-					"\t": tokens.append(MarkdownToken.of(MarkdownTokenType.TAB, character))
-					_: tokens.append(MarkdownToken.of(MarkdownTokenType.PARAGRAPH, character))
-			MarkdownTokenType.HORIZONTAL_RULE:
-				match character:
-					"*": tokens.append(MarkdownToken.of(MarkdownTokenType.ITALIC, character))
-					"^": tokens.append(MarkdownToken.of(MarkdownTokenType.SUPER_SCRIPT, character))
-					"_": tokens.append(MarkdownToken.of(MarkdownTokenType.UNDERLINE, character))
-					"~": tokens.append(MarkdownToken.of(MarkdownTokenType.SUB_SCRIPT, character))
-					"`": tokens.append(MarkdownToken.of(MarkdownTokenType.CODE_BLOCK, character))
-					"\n": tokens.append(MarkdownToken.of(MarkdownTokenType.NEWLINE, character))
-					"\t": tokens.append(MarkdownToken.of(MarkdownTokenType.TAB, character))
-					_: tokens.append(MarkdownToken.of(MarkdownTokenType.PARAGRAPH, character))
-			MarkdownTokenType.CODE_BLOCK:
-				match character:
-					"`": tokens.append(MarkdownToken.of(MarkdownTokenType.CODE_BLOCK, character))
-					"\n": tokens.append(MarkdownToken.of(MarkdownTokenType.NEWLINE, character))
-					_: tokens.append(MarkdownToken.of(MarkdownTokenType.CODE_CONTENT, character))
-			MarkdownTokenType.CODE_CONTENT:
-				match character:
-					"`": tokens.append(MarkdownToken.of(MarkdownTokenType.CODE_BLOCK, character))
-					"\n": tokens.append(MarkdownToken.of(MarkdownTokenType.NEWLINE, character))
-					_: tokens.append(MarkdownToken.of(MarkdownTokenType.PARAGRAPH, character))
-			#MarkdownTokenType.PARENTHESES:
-				#match character:
-					#"\n": tokens.append(MarkdownToken.of(MarkdownTokenType.NEWLINE, character))
-					#"\t": tokens.append(MarkdownToken.of(MarkdownTokenType.TAB, character))
-					#_: tokens.append(MarkdownToken.of(MarkdownTokenType.PARAGRAPH, character))
+		print(character)
+		var current_type = tokens.back().type
+		match character:
+			"#":
+				match current_type:
+					MarkdownTokenType.NEWLINE: tokens.append(MarkdownToken.new(MarkdownTokenType.HEADER_1, character))
+					MarkdownTokenType.HEADER_1: tokens = replace(tokens, MarkdownTokenType.HEADER_2, character)
+					MarkdownTokenType.HEADER_2: tokens = replace(tokens, MarkdownTokenType.HEADER_3, character)
+					MarkdownTokenType.HEADER_3: tokens = replace(tokens, MarkdownTokenType.HEADER_4, character)
+					MarkdownTokenType.HEADER_4: tokens = replace(tokens, MarkdownTokenType.HEADER_5, character)
+					MarkdownTokenType.HEADER_5: tokens = replace(tokens, MarkdownTokenType.HEADER_6, character)
+			"*":
+				match current_type:
+					MarkdownTokenType.ITALIC: tokens = replace(tokens, MarkdownTokenType.BOLD, character)
+					_: tokens.append(MarkdownToken.new(MarkdownTokenType.ITALIC, character))
+			"^":
+				tokens.append(MarkdownToken.new(MarkdownTokenType.SUPER_SCRIPT, character))
+			"_":
+				tokens.append(MarkdownToken.new(MarkdownTokenType.UNDERLINE, character))
+			"~":
+				match current_type:
+					MarkdownTokenType.SUB_SCRIPT: tokens = replace(tokens, MarkdownTokenType.STRIKETHROUGH, character)
+					_: tokens.append(MarkdownToken.new(MarkdownTokenType.SUB_SCRIPT, character))
+			"`":
+				tokens.append(MarkdownToken.new(MarkdownTokenType.CODE_BLOCK, character))
+			"\n":
+				tokens.append(MarkdownToken.new(MarkdownTokenType.NEWLINE, character))
+			"\t":
+				tokens.append(MarkdownToken.new(MarkdownTokenType.TAB, character))
+			" ":
+				tokens.append(MarkdownToken.new(MarkdownTokenType.SPACE, character))
+			_:
+				match current_type:
+					MarkdownTokenType.PARAGRAPH: tokens.back().content += character
+					_: tokens.append(MarkdownToken.new(MarkdownTokenType.PARAGRAPH, character))
+	return tokens
 
-func replace(tokens: Array[MarkdownToken], new_type: int, character: String):
+
+static func replace(tokens: Array, new_type: int, character: String):
 	tokens.back().type = new_type
 	tokens.back().content += character
 	return tokens
 
-func is_hash(character: String): return true if character == "#" else false
-func is_star(character: String): return true if character == "*" else false
-func is_line(character: String): return true if character == "-" else false
-func is_arrow(character: String): return true if character == "^" else false
-func is_tilde(character: String): return true if character == "~" else false
-func is_tick(character: String): return true if character == "`" else false
+
+static func pretty_print(token_stream: Array):
+	return token_stream.reduce(func(accum, data):
+		return accum + ", {" + MarkdownTokenType.int_to_token_type(data.type) + ", " + data.content.c_escape() + "}","[") + "]"

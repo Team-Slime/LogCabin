@@ -13,7 +13,7 @@ script/source = "extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-		print(MarkdownLexer.pretty_print(MarkdownLexer.tokenize(\"# aa*aa*aa \\n# aa~~a~~\")))
+	MarkdownLexer.tokenize(\"# Hello!\")
 "
 
 [node name="mod" type="Control"]
