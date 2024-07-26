@@ -26,3 +26,16 @@ func _ready() -> void:
 		for child in find_children("*", "ShelfItem"):
 			child.queue_free()
 	)
+
+
+#func _on_pre_sort_children() -> void:
+	#if size.x < 340:
+		#$HBoxContainer/DetachAll.visible = false
+		#$HBoxContainer/DetachAllSmall.visible = true
+		#$HBoxContainer/Import.visible = false
+		#$HBoxContainer/ImportSmall.visible = true
+	#else:
+		#$HBoxContainer/DetachAll.visible = true
+		#$HBoxContainer/DetachAllSmall.visible = false
+		#$HBoxContainer/Import.visible = true
+		#$HBoxContainer/ImportSmall.visible = false
