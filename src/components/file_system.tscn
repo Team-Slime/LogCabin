@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://dp3e0qs2y2ex5"]
 
-[ext_resource type="Script" path="res://src/scripts/shelf_manager.gd" id="1_fkyor"]
+[ext_resource type="Script" path="res://src/scripts/shelf/shelf_manager.gd" id="1_fkyor"]
 [ext_resource type="Theme" uid="uid://ddppbu11vpc1r" path="res://settings/shelf.tres" id="2_d82cx"]
-[ext_resource type="Script" path="res://src/scripts/search_box.gd" id="3_31a1a"]
-[ext_resource type="Script" path="res://src/scripts/shelf_folder.gd" id="4_orhio"]
+[ext_resource type="Script" path="res://src/scripts/shelf/search_box.gd" id="3_31a1a"]
+[ext_resource type="Script" path="res://src/scripts/shelf/shelf_folder.gd" id="4_orhio"]
 
 [node name="ShelfManager" type="VBoxContainer" node_paths=PackedStringArray("add_folder", "remove_folder", "file_panel", "root")]
 anchors_preset = 9
@@ -24,6 +24,11 @@ layout_mode = 2
 layout_mode = 2
 text = "Detach All Folder"
 
+[node name="DetachAllSmall" type="Button" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+text = "DE"
+
 [node name="SearchBox" type="LineEdit" parent="HBoxContainer" node_paths=PackedStringArray("hide_blacklist")]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -39,6 +44,11 @@ matching_edge = 0.32
 layout_mode = 2
 text = "Import Folder"
 
+[node name="ImportSmall" type="Button" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+text = "IM"
+
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
@@ -52,4 +62,5 @@ size_flags_vertical = 3
 script = ExtResource("4_orhio")
 margin_setting = ExtResource("2_d82cx")
 
+[connection signal="pre_sort_children" from="." to="." method="_on_pre_sort_children"]
 [connection signal="text_changed" from="HBoxContainer/SearchBox" to="HBoxContainer/SearchBox" method="fuzzy_search"]

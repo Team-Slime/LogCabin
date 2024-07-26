@@ -1,10 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://be2boapsrlwbu"]
+[gd_scene load_steps=7 format=3 uid="uid://be2boapsrlwbu"]
 
+[ext_resource type="Script" path="res://test.gd" id="1_e5tok"]
 [ext_resource type="PackedScene" uid="uid://dp3e0qs2y2ex5" path="res://src/components/file_system.tscn" id="1_fs11v"]
 [ext_resource type="PackedScene" uid="uid://caa8hyoisho7m" path="res://src/components/file_aside.tscn" id="2_ikjm5"]
 [ext_resource type="PackedScene" uid="uid://dv8fo5r33wyc" path="res://src/components/markdown_editor.tscn" id="2_oyicy"]
-[ext_resource type="Script" path="res://src/scripts/markdown_parser.gd" id="3_ohr1l"]
 [ext_resource type="PackedScene" uid="uid://fhrx5fhi5epg" path="res://src/components/markdown_aside.tscn" id="3_ufg7a"]
+
+[sub_resource type="GDScript" id="GDScript_n5b7k"]
+resource_name = "AAA"
+script/source = "extends Node
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+		print(MarkdownLexer.pretty_print(MarkdownLexer.tokenize(\"# aa*aa*aa \\n# aa~~a~~\")))
+"
 
 [node name="mod" type="Control"]
 layout_mode = 3
@@ -13,6 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_e5tok")
 
 [node name="FileDialog" type="FileDialog" parent="."]
 title = "Open a Directory"
@@ -51,8 +62,5 @@ layout_mode = 2
 [node name="MarkdownEditor" parent="HSplitContainer/HSplitContainer" instance=ExtResource("2_oyicy")]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("3_ohr1l")
+[node name="Node" type="Node" parent="."]
+script = SubResource("GDScript_n5b7k")
