@@ -12,3 +12,4 @@ class_name ShelfItem extends Button
 
 func _ready() -> void:
 	alignment = HORIZONTAL_ALIGNMENT_LEFT
+	text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
