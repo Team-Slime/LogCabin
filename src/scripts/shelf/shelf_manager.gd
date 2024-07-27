@@ -8,6 +8,7 @@ class_name ShelfManager extends ShelfGroup
 func _ready() -> void:
 	add_folder.pressed.connect(func():
 		file_dialog.show()
+		Message.new(0)
 	)
 	file_dialog.dir_selected.connect(func(dir: String):
 		var item := ShelfItem.new()
@@ -25,6 +26,7 @@ func _ready() -> void:
 			child.queue_free()
 		for child in find_children("*", "ShelfItem"):
 			child.queue_free()
+		Message.new(1)
 	)
 
 
